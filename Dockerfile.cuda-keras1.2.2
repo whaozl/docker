@@ -1,0 +1,58 @@
+FROM nvidia/cuda:8.0-cudnn5-devel-ubuntu14.04
+MAINTAINER whaozl <whaozl@163.com>
+
+
+RUN apt-get update && apt-get install -y \
+  gcc \
+  g++ \
+  gfortran \
+  git \
+  wget \
+  vim \
+  unzip \
+  build-essential \
+  libopenblas-dev \
+  libopencv-dev \
+  liblapack-dev \
+  libatlas-base-dev \
+  python-dev
+
+# install pip
+RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
+  && python get-pip.py \
+  && ln -s /usr/local/bin/pip  /usr/bin/pip
+
+#install python lib
+RUN pip install setuptools wheel pillow nose numpy scipy matplotlib \
+  scikit-learn scikit-image pyyaml h5py
+  
+#install theano and keras
+RUN pip install theano && pip install keras
+
+#config keras
+RUN mkdir /root/.keras && \
+  echo '{\n \
+  \n"image_dim_ordering": "th", \
+  \n"epsilon": 1e-07, \
+  \n"floatx": "float32", \
+  \n"backend": "theano" \
+  \n}' \
+  > /root/.keras/keras.json
+
+#config theano
+RUN echo "[global] \
+  \nopenmp=False \
+  \ndevice=gpu \
+  \noptimizer=fast_compile \
+  \nfloatX=float32 \
+  \noptimizer_including=cudnn \
+  \nallow_input_downcast=True \
+  \n[lib] \
+  \ncnmem=0.8 \
+  \n[blas] \
+  \nldflags= -lopenblas \
+  \n[nvcc] \
+  \nfastmath=True" \
+  > /root/.theanorc
+
+WORKDIR /root
