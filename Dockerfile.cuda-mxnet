@@ -1,0 +1,7 @@
+#FROM nvidia/cuda:8.0-cudnn5-devel
+FROM kaixhin/cuda-mxnet:8.0
+MAINTAINER whaozl<whaozl@163.com>
+
+CMD ln /dev/null /dev/raw1394
+
+WORKDIR /root/mxnet
