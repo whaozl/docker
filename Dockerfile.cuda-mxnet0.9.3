@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
   python-setuptools \
   wget
 
-RUN cd /root && git clone --recursive --branch v0.9.3 --progress -v https://github.com/dmlc/mxnet.git && \
+
+RUN cd /root && git clone --recursive --branch v0.9.3 --progress -v  https://github.com/dmlc/mxnet && cd mxnet && \
   cp make/config.mk config.mk && \
   sed -i 's/USE_BLAS = atlas/USE_BLAS = openblas/g' config.mk && \
   sed -i 's/USE_CUDA = 0/USE_CUDA = 1/g' config.mk && \
@@ -19,7 +20,6 @@ RUN cd /root && git clone --recursive --branch v0.9.3 --progress -v https://gith
   make -j"$(nproc)"
 
 RUN cd /root/mxnet/python && python setup.py install
-
 RUN echo "deb http://cran.rstudio.com/bin/linux/ubuntu trusty/" >> /etc/apt/sources.list
 RUN apt-get update && apt-get install -y --force-yes r-base
 
