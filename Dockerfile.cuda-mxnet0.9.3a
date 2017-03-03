@@ -28,7 +28,7 @@ RUN pip install setuptools wheel pillow nose numpy scipy matplotlib \
   scikit-learn scikit-image pyyaml h5py
 
 #install mxnet
-pip install mxnet-cu80
+RUN pip install mxnet-cu80
 
 CMD ln /dev/null /dev/raw1394
 
