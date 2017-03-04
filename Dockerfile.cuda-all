@@ -20,19 +20,19 @@ RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
 
 # install pip
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
-  && python get-pip.py \
+  && python3 get-pip.py \
   && ln -s /usr/local/bin/pip  /usr/bin/pip
 
 #install python lib
-RUN pip --no-cache-dir install wheel pillow nose scipy matplotlib \
+RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib \
   scikit-learn scikit-image pyyaml h5py pandas
 
 #install jupyter and jupyter lab and config jupyter
-#you should set password by cmd
+#you should set password by
 #ipython
 #from notebook.auth import passwd
 #passwd()
-RUN pip --no-cache-dir install jupyter jupyterlab \
+RUN pip3 --no-cache-dir install jupyter jupyterlab \
   && jupyter serverextension enable --py jupyterlab --sys-prefix \
   && jupyter notebook --generate-config \
   && echo "c.NotebookApp.ip='*'\n \
@@ -43,13 +43,13 @@ RUN pip --no-cache-dir install jupyter jupyterlab \
   > /root/.jupyter/jupyter_notebook_config.py
 
 #install mxnet
-RUN pip --no-cache-dir install mxnet-cu80
+RUN pip3 --no-cache-dir install mxnet-cu80
 
 #install tensorflow
-RUN pip --no-cache-dir install tensorflow-gpu
+RUN pip3 --no-cache-dir install tensorflow-gpu
 
 #install theano and keras
-RUN pip --no-cache-dir install theano && pip install keras
+RUN pip3 --no-cache-dir install theano && pip install keras
 
 #config keras
 RUN mkdir /root/.keras && \

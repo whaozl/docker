@@ -28,7 +28,8 @@ RUN pip --no-cache-dir install wheel pillow nose scipy matplotlib \
   scikit-learn scikit-image pyyaml h5py pandas
 
 #install jupyter and jupyter lab and config jupyter
-#you should set password by ipython
+#you should set password by
+#ipython
 #from notebook.auth import passwd
 #passwd()
 RUN pip --no-cache-dir install jupyter jupyterlab \
