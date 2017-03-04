@@ -5,10 +5,9 @@ RUN apt-get update && apt-get install -y \
   git \
   libopenblas-dev \
   libopencv-dev \
-  libcupti-dev \
-  python3-dev \
-  python3-numpy \
-  python3-setuptools \
+  python-dev \
+  python-numpy \
+  python-setuptools \
   wget \
   vim
 
@@ -33,7 +32,7 @@ RUN pip --no-cache-dir install wheel pillow nose scipy matplotlib \
 #ipython
 #from notebook.auth import passwd
 #passwd()
-pip --no-cache-dir install jupyter jupyterlab \
+RUN pip --no-cache-dir install jupyter jupyterlab \
   && jupyter serverextension enable --py jupyterlab --sys-prefix \
   && jupyter notebook --generate-config \
   && echo "c.NotebookApp.ip='*'\n \
@@ -44,10 +43,10 @@ pip --no-cache-dir install jupyter jupyterlab \
   > /root/.jupyter/jupyter_notebook_config.py
 
 #install mxnet
-pip --no-cache-dir install mxnet-cu80
+RUN pip --no-cache-dir install mxnet-cu80
 
 #install tensorflow
-pip --no-cache-dir install tensorflow-gpu
+RUN pip --no-cache-dir install tensorflow-gpu
 
 #install theano and keras
 RUN pip --no-cache-dir install theano && pip install keras
