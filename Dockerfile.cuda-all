@@ -50,7 +50,7 @@ pip --no-cache-dir install mxnet-cu80
 pip --no-cache-dir install tensorflow-gpu
 
 #install theano and keras
-RUN pip install theano && pip install keras
+RUN pip --no-cache-dir install theano && pip install keras
 
 #config keras
 RUN mkdir /root/.keras && \
