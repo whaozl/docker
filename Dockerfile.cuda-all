@@ -25,11 +25,12 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && ln -s /usr/local/bin/pip  /usr/bin/pip
 
 #install python lib
-RUN pip --no-cache-dir install setuptools wheel pillow nose numpy scipy matplotlib \
-  scikit-learn scikit-image pyyaml h5py
+RUN pip --no-cache-dir install wheel pillow nose scipy matplotlib \
+  scikit-learn scikit-image pyyaml h5py pandas
 
 #install jupyter and jupyter lab and config jupyter
-#you should set password by ipython
+#you should set password by cmd
+#ipython
 #from notebook.auth import passwd
 #passwd()
 pip --no-cache-dir install jupyter jupyterlab \
