@@ -9,7 +9,8 @@ RUN apt-get update && apt-get install -y \
   python-numpy \
   python-setuptools \
   wget \
-  vim
+  vim \
+  openssh-server
 
 #vim support for chinese
 RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
@@ -35,10 +36,10 @@ RUN pip --no-cache-dir install wheel pillow nose scipy matplotlib \
 RUN pip --no-cache-dir install jupyter jupyterlab \
   && jupyter serverextension enable --py jupyterlab --sys-prefix \
   && jupyter notebook --generate-config \
-  && echo "c.NotebookApp.ip='*'\n \
-  c.NotebookApp.password=u'input your password'\n \
-  c.NotebookApp.open_browser=False\n \
-  c.NotebookApp.port=8888\n \
+  && echo "c.NotebookApp.ip='*'\n\
+c.NotebookApp.password=u'input your password'\n\
+c.NotebookApp.open_browser=False\n\
+c.NotebookApp.port=8888\n \
   " \
   > /root/.jupyter/jupyter_notebook_config.py
 
@@ -77,6 +78,10 @@ RUN echo "[global] \
   \nfastmath=True" \
   > /root/.theanorc
 
+#config openssh-server ssh
+RUN cd /etc/ssh &&
+  sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' sshd_config && \
+  sed -i 's/#PasswordAuthentication/PasswordAuthentication/g' sshd_config
 
 CMD ln /dev/null /dev/raw1394
 
