@@ -11,47 +11,35 @@ python-setuptools \
 wget \
 vim \
 openssh-server \
-
-#vim support for chinese
-&& RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030  \
+\
+\
+&& echo "set fileencodings=utf-8,gb2312,gbk,gb18030  \
 \nset termencoding=utf-8  \
 \nset encoding=prc"  \
 >> /etc/vim/vimrc \
-
-# install pip
-&& RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
+\
+\
+&& wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
 && python get-pip.py \
 && ln -s /usr/local/bin/pip  /usr/bin/pip \
-
-#install python lib
-&& RUN pip --no-cache-dir install wheel pillow nose scipy matplotlib \
-scikit-learn scikit-image pyyaml h5py pandas \
-
-#install jupyter and jupyter lab and config jupyter
-#you should set password by
-#ipython
-#from notebook.auth import passwd
-#passwd()
-&& RUN pip --no-cache-dir install jupyter jupyterlab \
+\
+\
+&& pip --no-cache-dir install wheel pillow nose scipy matplotlib scikit-learn scikit-image pyyaml h5py pandas jupyter jupyterlab\
+\
+\
 && jupyter serverextension enable --py jupyterlab --sys-prefix \
 && jupyter notebook --generate-config \
 && echo "c.NotebookApp.ip='*'\n\
-c.NotebookApp.password=u'input your password'\n\
+c.NotebookApp.password=u'sha1:9681a90538f6:9c8efdffe60d03ae2f0c17ab16fcf52c9d134296'\n\
 c.NotebookApp.open_browser=False\n\
 c.NotebookApp.port=8888\n" \
 > /root/.jupyter/jupyter_notebook_config.py \
-
-#install mxnet
-&& RUN pip --no-cache-dir install mxnet-cu80 \
-
-#install tensorflow
-&& RUN pip --no-cache-dir install tensorflow-gpu \
-
-#install theano and keras
-&& RUN pip --no-cache-dir install theano && pip install keras \
-
-#config keras
-&& RUN mkdir /root/.keras && \
+\
+\
+&& pip --no-cache-dir install mxnet-cu80 tensorflow-gpu theano keras\
+\
+\
+&& mkdir /root/.keras && \
 echo '{\n \
 \n"image_dim_ordering": "tf", \
 \n"epsilon": 1e-07, \
@@ -59,9 +47,9 @@ echo '{\n \
 \n"backend": "tensorflow" \
 \n}' \
 > /root/.keras/keras.json \
-  
-#config theano
-&& RUN echo "[global] \
+\
+\
+&& echo "[global] \
 \nopenmp=False \
 \ndevice=gpu \
 \noptimizer=fast_compile \
@@ -75,10 +63,11 @@ echo '{\n \
 \n[nvcc] \
 \nfastmath=True" \
 > /root/.theanorc \
-
-#config openssh-server ssh
-&& RUN cd /etc/ssh && \
+\
+\
+&& cd /etc/ssh && \
 sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' sshd_config && \
-sed -i 's/#PasswordAuthentication/PasswordAuthentication/g' sshd_config \
-&& CMD ln /dev/null /dev/raw1394
-&& WORKDIR /
+sed -i 's/#PasswordAuthentication/PasswordAuthentication/g' sshd_config
+
+CMD ln /dev/null /dev/raw1394
+WORKDIR /
