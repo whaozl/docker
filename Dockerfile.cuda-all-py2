@@ -43,14 +43,8 @@ c.NotebookApp.port=8888\n \
   " \
   > /root/.jupyter/jupyter_notebook_config.py
 
-#install mxnet
-RUN pip --no-cache-dir install mxnet-cu80
-
-#install tensorflow
-RUN pip --no-cache-dir install tensorflow-gpu
-
-#install theano and keras
-RUN pip --no-cache-dir install theano && pip install keras
+#install dl framework
+RUN pip --no-cache-dir install mxnet-cu80 tensorflow-gpu theano keras
 
 #config keras
 RUN mkdir /root/.keras && \

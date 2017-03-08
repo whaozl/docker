@@ -19,7 +19,7 @@ RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
   >> /etc/vim/vimrc
 
 
-# install pip
+# install pip3
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && python3 get-pip.py \
   && ln -s /usr/local/bin/pip  /usr/bin/pip
@@ -43,14 +43,8 @@ c.NotebookApp.port=8888\n \
   " \
   > /root/.jupyter/jupyter_notebook_config.py
 
-#install mxnet
-RUN pip3 --no-cache-dir install mxnet-cu80
-
-#install tensorflow
-RUN pip3 --no-cache-dir install tensorflow-gpu
-
-#install theano and keras
-RUN pip3 --no-cache-dir install theano && pip install keras
+#install dl framework
+RUN pip3 --no-cache-dir install mxnet-cu80 tensorflow-gpu theano keras
 
 #config keras
 RUN mkdir /root/.keras && \

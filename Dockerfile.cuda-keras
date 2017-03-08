@@ -26,8 +26,8 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
 RUN pip install setuptools wheel pillow nose numpy scipy matplotlib \
   scikit-learn scikit-image pyyaml h5py
   
-#install theano and keras
-RUN pip install theano && pip install keras
+#install dl framework
+RUN pip install theano tensorflow-gpu keras
 
 #config keras
 RUN mkdir /root/.keras && \
