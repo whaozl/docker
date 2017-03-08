@@ -81,7 +81,13 @@ RUN echo "[global] \
 #config openssh-server ssh
 RUN cd /etc/ssh && \
   sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' sshd_config && \
-  sed -i 's/#PasswordAuthentication/PasswordAuthentication/g' sshd_config
+  sed -i 's/#PasswordAuthentication/PasswordAuthentication/g' sshd_config && \
+  sed -i 's/RhostsRSAAuthentication no/RhostsRSAAuthentication yes/g' sshd_config && \
+  sed -i 's/HostbasedAuthentication no/HostbasedAuthentication yes/g' sshd_config && \
+  sed -i 's/PermitEmptyPasswords no/PermitEmptyPasswords yes/g' sshd_config && \
+  sed -i 's/#KerberosAuthentication no/KerberosAuthentication yes/g' sshd_config && \
+  sed -i 's/#KerberosOrLocalPasswd/KerberosOrLocalPasswd/g' sshd_config && \
+  sed -i 's/#KerberosTicketCleanup/KerberosTicketCleanup/g' sshd_config
 
 CMD ln /dev/null /dev/raw1394
 
