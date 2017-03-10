@@ -87,7 +87,7 @@ RUN cd /etc/ssh && \
 #CMD ln /dev/null /dev/raw1394
 
 RUN mkdir -p /var/log/supervisor \
-  echo "[supervisord]\
+  && echo "[supervisord]\
   \nnodaemon=true\
   \n\
   \n[program:sshd]\
