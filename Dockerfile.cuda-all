@@ -99,10 +99,10 @@ RUN mkdir -p /var/log/supervisor \
   \ncommand=ln /dev/null /dev/raw1394\
   \nautorstart=true\
   \nautorestart=true\
-  \n
+  \n\
   \n[program:notebook]\
   \ndirectory=/\
-  \ncommand=jupyter lab\
+  \ncommand=nohup jupyter lab >/dev/null 2>&1 &\
   \nautorstart=true\
   \nautorestart=true\
   \nstdout_logfile=/.logs/ipython_check.log\
