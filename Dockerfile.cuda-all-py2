@@ -92,15 +92,26 @@ RUN mkdir -p /var/log/supervisor \
   \n[program:sshd]\
   \ncommand=/usr/sbin/sshd -D\
   \nautorstart=true\
+  \nautorestart=true\
   \n\
   \n[program:devraw]\
   \ncommand=ln /dev/null /dev/raw1394\
   \nautorstart=true\
+  \nautorestart=true\
   \n
   \n[program:notebook]\
   \ndirectory=/\
-  \ncommand=nohup jupyter lab >/dev/null 2>&1 &\
-  \nautorstart=true" \
+  \ncommand=jupyter lab\
+  \nautorstart=true\
+  \nautorestart=true\
+  \nstdout_logfile=/.logs/ipython_check.log\
+  \nstdout_logfile_backups=10\
+  \nstdout_logfile_maxbytes=10MB\
+  \nstderr_logfile=/.logs/ipython_check_err.log\
+  \nstderr_logfile_maxbytes=10MB\
+  \nstderr_logfile_backups=10\
+  \nloglevel=info\
+  " \
   > /etc/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]
