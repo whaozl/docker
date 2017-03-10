@@ -8,8 +8,6 @@ RUN apt-get update && apt-get install -y \
   g++ \
   gfortran \
   git \
-  wget \
-  vim \
   build-essential \
   libopenblas-dev \
   libopencv-dev \
@@ -18,7 +16,10 @@ RUN apt-get update && apt-get install -y \
   python3-dev \
   python3-numpy \
   python3-setuptools \
-  openssh-server
+  wget \
+  vim \
+  openssh-server \
+  supervisor
 
 #vim support for chinese
 RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
@@ -115,5 +116,11 @@ RUN cd /root && \
 # python3 enhance.py --zoom=1 --device=gpu --model=repair --type=photo /data/IMG_0596.jpg
 # python3 enhance.py --zoom=2 --device=gpu /data/IMG_0596.jpg
 # python3 enhance.py --zoom=1 --device=gpu --model=deblur --type=photo /data/IMG_0596.png
+
+RUN mkdir -p /var/log/supervisor
+
+COPY supervisord.conf /etc/supervisord.conf
+
+CMD ["/usr/bin/supervisord"]
 
 WORKDIR /

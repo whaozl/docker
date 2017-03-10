@@ -3,6 +3,7 @@ MAINTAINER  whaozl <whaozl@163.com>
 
 RUN apt-get update && apt-get install -y \
   git \
+  supervisor \
   libopenblas-dev \
   libopencv-dev \
   python3-dev \
@@ -84,36 +85,9 @@ RUN cd /etc/ssh && \
   sed -i 's/#KerberosOrLocalPasswd/KerberosOrLocalPasswd/g' sshd_config && \
   sed -i 's/#KerberosTicketCleanup/KerberosTicketCleanup/g' sshd_config
 
-#CMD ln /dev/null /dev/raw1394
+RUN mkdir -p /var/log/supervisor
 
-RUN mkdir -p /var/log/supervisor \
-  && echo "[supervisord]\
-  \nnodaemon=true\
-  \n\
-  \n[program:sshd]\
-  \ncommand=/usr/sbin/sshd -D\
-  \nautorstart=true\
-  \nautorestart=true\
-  \n\
-  \n[program:devraw]\
-  \ncommand=ln /dev/null /dev/raw1394\
-  \nautorstart=true\
-  \nautorestart=true\
-  \n\
-  \n[program:notebook]\
-  \ndirectory=/\
-  \ncommand=nohup jupyter lab >/dev/null 2>&1 &\
-  \nautorstart=true\
-  \nautorestart=true\
-  \nstdout_logfile=/.logs/ipython_check.log\
-  \nstdout_logfile_backups=10\
-  \nstdout_logfile_maxbytes=10MB\
-  \nstderr_logfile=/.logs/ipython_check_err.log\
-  \nstderr_logfile_maxbytes=10MB\
-  \nstderr_logfile_backups=10\
-  \nloglevel=info\
-  " \
-  > /etc/supervisord.conf
+COPY supervisord.conf /etc/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]
 
