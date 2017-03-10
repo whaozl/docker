@@ -52,7 +52,7 @@ c.NotebookApp.port=8888\n \
   > /root/.jupyter/jupyter_notebook_config.py
 
 #install dl framework
-RUN pip3 --no-cache-dir install mxnet-cu80 tensorflow-gpu theano keras
+RUN pip3 --no-cache-dir install theano keras
 
 #config keras
 RUN mkdir /root/.keras && \
@@ -99,7 +99,7 @@ RUN cd /root && \
   python3 setup.py install
 
 # install cpython3 for neural-enhance
-RUN apt-get install cpython3
+#RUN apt-get install cpython3
 
 # install neural-enhance
 RUN cd /root && \ 
@@ -115,7 +115,5 @@ RUN cd /root && \
 # python3 enhance.py --zoom=1 --device=gpu --model=repair --type=photo /data/IMG_0596.jpg
 # python3 enhance.py --zoom=2 --device=gpu /data/IMG_0596.jpg
 # python3 enhance.py --zoom=1 --device=gpu --model=deblur --type=photo /data/IMG_0596.png
-
-CMD ln /dev/null /dev/raw1394
 
 WORKDIR /
