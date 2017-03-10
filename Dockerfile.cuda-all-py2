@@ -85,29 +85,9 @@ RUN cd /etc/ssh && \
 
 #CMD ln /dev/null /dev/raw1394
 
-#CMD ln /dev/null /dev/raw1394
+RUN mkdir -p /var/log/supervisor
 
-RUN mkdir -p /var/log/supervisor \
-  && echo "[supervisord]\
-  \nnodaemon=true\
-  \n\
-  \n[program:sshd]\
-  \ncommand=/usr/sbin/sshd -D\
-  \nautorstart=true\
-  \nautorestart=true\
-  \n\
-  \n[program:devraw]\
-  \ncommand=ln /dev/null /dev/raw1394\
-  \nautorstart=true\
-  \nautorestart=true\
-  \n
-  \n[program:notebook]\
-  \ndirectory=/\
-  \ncommand=nohup jupyter lab >/dev/null 2>&1 & \
-  \nautorstart=true\
-  \nautorestart=true\
-  " \
-  > /etc/supervisord.conf
+COPY supervisord.conf /etc/supervisord.conf
 
 CMD ["/usr/bin/supervisord"]
 
