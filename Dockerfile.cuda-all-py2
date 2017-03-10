@@ -97,7 +97,8 @@ RUN mkdir -p /var/log/supervisor \
   \ncommand=ln /dev/null /dev/raw1394\
   \nautorstart=true\
   \n
-  \n[program:jupyterlab]\
+  \n[program:notebook]\
+  \ndirectory=/\
   \ncommand=nohup jupyter lab >/dev/null 2>&1 &\
   \nautorstart=true" \
   > /etc/supervisord.conf
