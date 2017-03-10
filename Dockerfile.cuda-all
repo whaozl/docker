@@ -3,7 +3,6 @@ MAINTAINER  whaozl <whaozl@163.com>
 
 RUN apt-get update && apt-get install -y \
   git \
-  supervisor \
   libopenblas-dev \
   libopencv-dev \
   python3-dev \
