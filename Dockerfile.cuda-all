@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
   python3-setuptools \
   wget \
   vim \
-  openssh-server
+  openssh-server \
+  supervisor
 
 #vim support for chinese
 RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
@@ -83,6 +84,21 @@ RUN cd /etc/ssh && \
   sed -i 's/#KerberosOrLocalPasswd/KerberosOrLocalPasswd/g' sshd_config && \
   sed -i 's/#KerberosTicketCleanup/KerberosTicketCleanup/g' sshd_config
 
-CMD ln /dev/null /dev/raw1394
+#CMD ln /dev/null /dev/raw1394
+
+RUN mkdir -p /var/log/supervisor \
+  echo "[supervisord]\
+  \nnodaemon=true\
+  \n\
+  \n[program:sshd]\
+  \ncommand=/usr/sbin/sshd -D\
+  \nautorstart=true\
+  \n\
+  \n[program:devraw]\
+  \ncommand=ln /dev/null /dev/raw1394\
+  \nautorstart=true" \
+  > /etc/supervisord.conf
+
+CMD ["/usr/bin/supervisord"]
 
 WORKDIR /
