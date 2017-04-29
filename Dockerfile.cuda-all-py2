@@ -58,7 +58,7 @@ RUN cd /etc/ssh && \
   sed -i 's/#KerberosTicketCleanup/KerberosTicketCleanup/g' sshd_config
 
 
-RUN pip3 --no-cache-dir install https://cntk.ai/PythonWheel/GPU/cntk-2.0rc2-cp27-cp27mu-linux_x86_64.whl
+RUN pip --no-cache-dir install https://cntk.ai/PythonWheel/GPU/cntk-2.0rc2-cp27-cp27mu-linux_x86_64.whl
 
 
 #CMD ln /dev/null /dev/raw1394
