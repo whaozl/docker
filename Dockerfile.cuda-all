@@ -10,7 +10,8 @@ RUN apt-get update && apt-get install -y \
   python3-setuptools \
   wget \
   vim \
-  openssh-server
+  openssh-server \
+  openmpi-bin
 
 #vim support for chinese
 RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
@@ -83,7 +84,12 @@ RUN cd /etc/ssh && \
   sed -i 's/#KerberosOrLocalPasswd/KerberosOrLocalPasswd/g' sshd_config && \
   sed -i 's/#KerberosTicketCleanup/KerberosTicketCleanup/g' sshd_config
 
+RUN pip3 --no-cache-dir install https://cntk.ai/PythonWheel/GPU/cntk-2.0rc2-cp35-cp35m-linux_x86_64.whl
+
+
 #CMD ln /dev/null /dev/raw1394
-CMD ["sh", "-c", "ln /dev/null /dev/raw1394 ; /etc/init.d/ssh start ; nohup jupyter lab >/dev/null 2>&1 &"]
+#CMD ["sh", "-c", "ln /dev/null /dev/raw1394 ; /etc/init.d/ssh start ; nohup jupyter lab >/dev/null 2>&1 &"]
+
+CMD /etc/init.d/ssh start
 
 WORKDIR /
