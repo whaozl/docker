@@ -40,8 +40,7 @@ RUN pip3 --no-cache-dir install jupyter jupyterlab \
   && echo "c.NotebookApp.ip='*'\n\
 c.NotebookApp.password=u'sha1:7de7ea9c4921:c5633014d406ce2f7cfa9a80b2be1c280fd9f42f'\n\
 c.NotebookApp.open_browser=False\n\
-c.NotebookApp.port=8888\n \
-  " \
+c.NotebookApp.port=8888" \
   > /root/.jupyter/jupyter_notebook_config.py
 
 #install dl framework
