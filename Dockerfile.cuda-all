@@ -34,6 +34,8 @@ RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib \
 #ipython
 #from notebook.auth import passwd
 #passwd() passwd default is 123456
+#jupyter serverextension enable --py jupyterlab --sys-prefix
+#jupyter notebook --generate-config
 #/root/.jupyter/jupyter_notebook_config.py
 #c.NotebookApp.ip='*'
 #c.NotebookApp.password=u'sha1:7de7ea9c4921:c5633014d406ce2f7cfa9a80b2be1c280fd9f42f'
@@ -41,9 +43,7 @@ RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib \
 #c.NotebookApp.port=8888
 
 
-RUN pip3 --no-cache-dir install jupyter jupyterlab \
-  && jupyter serverextension enable --py jupyterlab --sys-prefix \
-  && jupyter notebook --generate-config
+RUN pip3 --no-cache-dir install jupyter jupyterlab
 
 #install dl framework
 RUN pip3 --no-cache-dir install mxnet-cu80 tensorflow-gpu theano keras
