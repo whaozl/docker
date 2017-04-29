@@ -34,19 +34,43 @@ RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib \
 #ipython
 #from notebook.auth import passwd
 #passwd() passwd default is 123456
-#/root/.jupyter/jupyter_notebook_config.py
-#c.NotebookApp.ip='*'
-#c.NotebookApp.password=u'sha1:7de7ea9c4921:c5633014d406ce2f7cfa9a80b2be1c280fd9f42f'
-#c.NotebookApp.open_browser=False
-#c.NotebookApp.port=8888
-
-
 RUN pip3 --no-cache-dir install jupyter jupyterlab \
   && jupyter serverextension enable --py jupyterlab --sys-prefix \
-  && jupyter notebook --generate-config
+  && jupyter notebook --generate-config \
+  && echo "c.NotebookApp.ip='*'\n\
+c.NotebookApp.password=u'sha1:7de7ea9c4921:c5633014d406ce2f7cfa9a80b2be1c280fd9f42f'\n\
+c.NotebookApp.open_browser=False\n\
+c.NotebookApp.port=8888" \
+  > /root/.jupyter/jupyter_notebook_config.py
 
 #install dl framework
 RUN pip3 --no-cache-dir install mxnet-cu80 tensorflow-gpu theano keras
+
+#config keras
+RUN mkdir /root/.keras && \
+  echo '{\n \
+  \n"image_dim_ordering": "tf", \
+  \n"epsilon": 1e-07, \
+  \n"floatx": "float32", \
+  \n"backend": "tensorflow" \
+  \n}' \
+  > /root/.keras/keras.json
+
+#config theano
+RUN echo "[global] \
+  \nopenmp=False \
+  \ndevice=gpu \
+  \noptimizer=fast_compile \
+  \nfloatX=float32 \
+  \noptimizer_including=cudnn \
+  \nallow_input_downcast=True \
+  \n[lib] \
+  \ncnmem=0.8 \
+  \n[blas] \
+  \nldflags= -lopenblas \
+  \n[nvcc] \
+  \nfastmath=True" \
+  > /root/.theanorc
 
 #config openssh-server ssh
 RUN cd /etc/ssh && \
