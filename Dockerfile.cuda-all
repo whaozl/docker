@@ -89,6 +89,7 @@ RUN pip3 --no-cache-dir install https://cntk.ai/PythonWheel/GPU/cntk-2.0rc2-cp35
 #CMD ln /dev/null /dev/raw1394
 #CMD ["sh", "-c", "ln /dev/null /dev/raw1394 ; /etc/init.d/ssh start ; nohup jupyter lab >/dev/null 2>&1 &"]
 
-CMD /etc/init.d/ssh start
+COPY start.sh /root/start.sh
+CMD sh /root/start.sh
 
 WORKDIR /
