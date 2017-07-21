@@ -26,8 +26,8 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && ln -s /usr/local/bin/pip  /usr/bin/pip
 
 #install python lib
-RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib \
-  scikit-learn scikit-image pyyaml h5py pandas
+RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
+  scikit-learn scikit-image pyyaml h5py pandas SimpleITK
 
 #install jupyter and jupyter lab and config jupyter
 #you should set password by
@@ -44,7 +44,7 @@ c.NotebookApp.port=8888" \
   > /root/.jupyter/jupyter_notebook_config.py
 
 #install dl framework
-RUN pip3 --no-cache-dir install opencv_python mxnet-cu80 tensorflow-gpu theano keras
+RUN pip3 --no-cache-dir install mxnet-cu80 tensorflow-gpu theano keras
 
 #config keras
 RUN mkdir /root/.keras && \
