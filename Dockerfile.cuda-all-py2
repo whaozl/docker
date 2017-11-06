@@ -26,7 +26,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
 
 #install python lib
 RUN pip --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
-  scikit-learn scikit-image pyyaml h5py pandas SimpleITK
+  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd
 
 #install jupyter and jupyter lab and config jupyter
 #you should set password by
@@ -82,7 +82,7 @@ RUN cd /etc/ssh && \
   sed -i 's/#KerberosOrLocalPasswd/KerberosOrLocalPasswd/g' sshd_config && \
   sed -i 's/#KerberosTicketCleanup/KerberosTicketCleanup/g' sshd_config
 
-RUN pip --no-cache-dir install https://cntk.ai/PythonWheel/GPU/cntk-2.0-cp27-cp27mu-linux_x86_64.whl
+RUN pip --no-cache-dir install https://cntk.ai/PythonWheel/GPU/cntk-2.2-cp27-cp27mu-linux_x86_64.whl
 
 #CMD ln /dev/null /dev/raw1394
 #CMD ["sh", "-c", "ln /dev/null /dev/raw1394 ; /etc/init.d/ssh start ; nohup jupyter lab >/dev/null 2>&1 &"]
