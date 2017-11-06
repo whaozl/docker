@@ -27,7 +27,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
 
 #install python lib
 RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
-  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd
+  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd py_linq
 
 #install jupyter and jupyter lab and config jupyter
 #you should set password by
