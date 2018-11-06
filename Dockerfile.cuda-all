@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn5-devel
+FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 MAINTAINER  whaozl <whaozl@163.com>
 
 RUN apt-get update && apt-get install -y \
@@ -27,7 +27,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
 
 #install python lib
 RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
-  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd py_linq tqdm
+  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd py_linq tqdm asq
 
 #install jupyter and jupyter lab and config jupyter
 #you should set password by
@@ -44,7 +44,7 @@ c.NotebookApp.port=8888" \
   > /root/.jupyter/jupyter_notebook_config.py
 
 #install dl framework
-RUN pip3 --no-cache-dir install mxnet-cu80 tensorflow-gpu theano keras
+RUN pip3 --no-cache-dir install mxnet-cu90 tensorflow-gpu keras torch torchvision
 
 #config keras
 RUN mkdir /root/.keras && \
