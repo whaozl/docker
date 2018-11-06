@@ -25,6 +25,8 @@ RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
 
 
 
+
+
 # install pip2
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && python2 get-pip.py \
@@ -36,6 +38,8 @@ RUN pip2 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python
 
 
 
+
+
 # install pip3
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && python3 get-pip.py \
@@ -44,6 +48,8 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
 #install python3 lib
 RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
   scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd py_linq tqdm asq
+
+
 
 
 
@@ -61,8 +67,14 @@ c.NotebookApp.open_browser=False\n\
 c.NotebookApp.port=8888" \
   > /root/.jupyter/jupyter_notebook_config.py
 
-#install dl framework
+
+
+
+#install deeplearning framework
 RUN pip3 --no-cache-dir install mxnet-cu90 tensorflow-gpu keras torch torchvision
+
+
+
 
 #config keras
 RUN mkdir /root/.keras && \
@@ -74,21 +86,10 @@ RUN mkdir /root/.keras && \
   \n}' \
   > /root/.keras/keras.json
 
-#config theano
-RUN echo "[global] \
-  \nopenmp=False \
-  \ndevice=gpu \
-  \noptimizer=fast_compile \
-  \nfloatX=float32 \
-  \noptimizer_including=cudnn \
-  \nallow_input_downcast=True \
-  \n[lib] \
-  \ncnmem=0.8 \
-  \n[blas] \
-  \nldflags= -lopenblas \
-  \n[nvcc] \
-  \nfastmath=True" \
-  > /root/.theanorc
+
+
+
+
 
 #config openssh-server ssh
 RUN cd /etc/ssh && \
@@ -101,10 +102,18 @@ RUN cd /etc/ssh && \
   sed -i 's/#KerberosOrLocalPasswd/KerberosOrLocalPasswd/g' sshd_config && \
   sed -i 's/#KerberosTicketCleanup/KerberosTicketCleanup/g' sshd_config
 
+
+
+
 #RUN pip3 --no-cache-dir install cntk-gpu
+
+
 
 #CMD ln /dev/null /dev/raw1394
 #CMD ["sh", "-c", "ln /dev/null /dev/raw1394 ; /etc/init.d/ssh start ; nohup jupyter lab >/dev/null 2>&1 &"]
+
+
+
 
 COPY start.sh /root/start.sh
 CMD sh /root/start.sh
