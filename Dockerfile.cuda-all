@@ -32,11 +32,12 @@ RUN echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
 # install pip2
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && python2 get-pip.py \
-  && ln -s /usr/local/bin/pip2  /usr/bin/pip2
+  && ln -s /usr/local/bin/pip2  /usr/bin/pip2 \
+  && rm get-pip.py
 
 #install python2 lib
 RUN pip2 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
-  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd py_linq tqdm asq
+  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd tqdm asq
 
 
 
@@ -45,11 +46,12 @@ RUN pip2 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python
 # install pip3
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && python3 get-pip.py \
-  && ln -s /usr/local/bin/pip3  /usr/bin/pip3
+  && ln -s /usr/local/bin/pip3  /usr/bin/pip3 \
+  && rm get-pip.py
 
 #install python3 lib
 RUN pip3 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
-  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd py_linq tqdm asq
+  scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd tqdm asq JPype1 pyhanlp
 
 
 
