@@ -10,6 +10,12 @@ MAINTAINER  whaozl <whaozl@163.com>
 #config keras
 #config openssh-server ssh
 
+
+#CMD ln /dev/null /dev/raw1394
+#CMD ["sh", "-c", "ln /dev/null /dev/raw1394 ; /etc/init.d/ssh start ; nohup jupyter lab >/dev/null 2>&1 &"]
+#COPY start.sh /root/start.sh
+#CMD sh /root/start.sh
+
 RUN apt-get update && apt-get install -y \
   git \
   libopenblas-dev \
@@ -72,9 +78,5 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
     > /root/.keras/keras.json
 
 
-#CMD ln /dev/null /dev/raw1394
-#CMD ["sh", "-c", "ln /dev/null /dev/raw1394 ; /etc/init.d/ssh start ; nohup jupyter lab >/dev/null 2>&1 &"]
-#COPY start.sh /root/start.sh
-#CMD sh /root/start.sh
-
 WORKDIR /
+
