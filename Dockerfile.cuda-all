@@ -55,7 +55,7 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && ln -s /usr/local/bin/pip2  /usr/bin/pip2 && ln -s /usr/local/bin/pip3  /usr/bin/pip3 \
   && rm get-pip.py \
   && pip2 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
-     scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd tqdm asq
+     scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd tqdm asq \
   && pip3 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
      scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd tqdm asq JPype1 pyhanlp \
      jupyter jupyterlab \
