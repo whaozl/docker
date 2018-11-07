@@ -35,7 +35,8 @@ RUN apt-get update && apt-get install -y \
   && apt-get clean
   && echo "set fileencodings=utf-8,gb2312,gbk,gb18030\
   \nset termencoding=utf-8\
-  \nset encoding=prc"\
+  \nset encoding=prc\
+  \nset number"\
   >> /etc/vim/vimrc \
   && cd /etc/ssh && \
   sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/g' sshd_config && \
