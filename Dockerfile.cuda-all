@@ -1,5 +1,5 @@
 FROM nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
-MAINTAINER  whaozl <whaozl@163.com>
+MAINTAINER  whaozl <whaozl@126.com>
 
 #install jupyter and jupyter lab and config jupyter
 #you should set password by
@@ -56,10 +56,11 @@ RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && rm get-pip.py \
   && pip2 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
      scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd tqdm asq \
+     tensorflow-gpu keras  \
   && pip3 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
      scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd tqdm asq JPype1 pyhanlp \
      jupyter jupyterlab \
-     mxnet-cu90 tensorflow-gpu keras torch torchvision \
+     tensorflow-gpu keras torch torchvision mxnet-cu90 \
   && jupyter serverextension enable --py jupyterlab --sys-prefix \
   && jupyter notebook --generate-config --allow-root \
   && echo "c.NotebookApp.ip='*'\n\
