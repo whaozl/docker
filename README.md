@@ -11,7 +11,7 @@
 
 >contains:
 - 1 base in nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
-- 2 config keras
+- 2 config keras opencv_python
 - 3 config openssh-server ssh
 - 4 /usr/local/lib/python3.5
 - 5 /usr/local/lib/python2.7
