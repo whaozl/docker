@@ -16,6 +16,7 @@ RUN apt-get update && apt-get install -y \
   openssh-server \
   openmpi-bin \
   lrzsz \
+  rar unrar zip unzip p7zip-full p7zip-rar p7zip \
   && apt-get clean
 
 #vim support for chinese
