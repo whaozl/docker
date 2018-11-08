@@ -53,6 +53,7 @@ RUN apt-get update && apt-get install -y \
 RUN wget https://bootstrap.pypa.io/get-pip.py --no-check-certificate \
   && python2 get-pip.py && python3 get-pip.py \
   && ln -s /usr/local/bin/pip2  /usr/bin/pip2 && ln -s /usr/local/bin/pip3  /usr/bin/pip3 \
+  && ln -s /usr/bin/python3 /usr/bin/p \
   && rm get-pip.py \
   && pip2 --no-cache-dir install wheel pillow nose scipy matplotlib opencv_python protobuf \
      scikit-learn scikit-image pyyaml h5py pandas SimpleITK regex jieba openpyxl xlsxwriter xlrd tqdm asq \
